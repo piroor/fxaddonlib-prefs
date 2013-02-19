@@ -20,10 +20,8 @@
    window['piro.sakura.ne.jp'].prefs.removePrefListener(listener);
 
  license: The MIT License, Copyright (c) 2009-2010 YUKI "Piro" Hiroshi
-   http://github.com/piroor/fxaddonlibs/blob/master/license.txt
  original:
-   http://github.com/piroor/fxaddonlibs/blob/master/prefs.js
-   http://github.com/piroor/fxaddonlibs/blob/master/prefs.test.js
+   http://github.com/piroor/fxaddonlib-prefs
 */
 
 /* To work as a JS Code Module  */
