@@ -19,7 +19,7 @@
    window['piro.sakura.ne.jp'].prefs.addPrefListener(listener);
    window['piro.sakura.ne.jp'].prefs.removePrefListener(listener);
 
- license: The MIT License, Copyright (c) 2009-2010 YUKI "Piro" Hiroshi
+ license: The MIT License, Copyright (c) 2009-2013 YUKI "Piro" Hiroshi
  original:
    http://github.com/piroor/fxaddonlib-prefs
 */
@@ -42,7 +42,7 @@ if (typeof window == 'undefined' ||
 }
 
 (function() {
-	const currentRevision = 8;
+	const currentRevision = 9;
 
 	if (!('piro.sakura.ne.jp' in window)) window['piro.sakura.ne.jp'] = {};
 
@@ -138,13 +138,28 @@ if (typeof window == 'undefined' ||
 	 
 		getChildren : function(aRoot, aBranch) 
 		{
-			return this.getDescendant(aRoot, aBranch)
-					.filter(function(aPrefstring) {
+			var foundChildren = {};
+			var possibleChildren = [];
+			var actualChildren = this.getDescendant(aRoot, aBranch)
+					.forEach(function(aPrefstring) {
 						var name = aPrefstring.replace(aRoot, '');
 						if (name.charAt(0) == '.')
 							name = name.substring(1);
-						return name.indexOf('.') < 0;
+						if (name.indexOf('.') < 0) {
+							if (!(aPrefstring in foundChildren)) {
+								actualChildren.push(aPrefstring);
+								foundChildren[aPrefstring] = true;
+							}
+						}
+						else {
+							let possibleChildKey = aRoot + name.split('.')[0];
+							if (possibleChildKey && !(possibleChildKey in foundChildren)) {
+								possibleChildren.push(possibleChildKey);
+								foundChildren[possibleChildKey] = true;
+							}
+						}
 					});
+			return possibleChildren.concat(actualChildren).sort();
 		},
 	 
 		addPrefListener : function(aObserver) 
