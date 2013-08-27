@@ -42,7 +42,7 @@ if (typeof window == 'undefined' ||
 }
 
 (function() {
-	const currentRevision = 10;
+	const currentRevision = 11;
 
 	if (!('piro.sakura.ne.jp' in window)) window['piro.sakura.ne.jp'] = {};
 
@@ -99,6 +99,15 @@ if (typeof window == 'undefined' ||
 				}
 			} catch(e) {
 				// getXXXPref can raise an error if it is the default branch.
+				return null;
+			}
+		},
+
+		getLocalizedPref : function(aPrefstring)
+		{
+			try {
+				return this.getPref(aPrefstring, Ci.nsIPrefLocalizedString).data;
+			} catch(e) {
 				return null;
 			}
 		},
