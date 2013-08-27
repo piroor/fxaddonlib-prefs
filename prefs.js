@@ -108,7 +108,7 @@ if (typeof window == 'undefined' ||
 			try {
 				return this.getPref(aPrefstring, Ci.nsIPrefLocalizedString).data;
 			} catch(e) {
-				return null;
+				return this.getPref(aPrefstring);
 			}
 		},
 
