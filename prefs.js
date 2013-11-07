@@ -42,7 +42,7 @@ if (typeof window == 'undefined' ||
 }
 
 (function() {
-	const currentRevision = 12;
+	const currentRevision = 13;
 
 	if (!('piro.sakura.ne.jp' in window)) window['piro.sakura.ne.jp'] = {};
 
@@ -117,19 +117,36 @@ if (typeof window == 'undefined' ||
 			return this.getPref(aPrefstring, this.DefaultPrefs, aInterface);
 		},
 	 
-		setPref : function(aPrefstring, aNewValue, aBranch) 
+		setPref : function(aPrefstring, aNewValue) 
 		{
-			aBranch = aBranch || this.Prefs;
+			var branch = this.Prefs;
+			var interface = null;
+			if (arguments.length > 2) {
+				for (let i = 2; i < arguments.length; i++)
+				{
+					let arg = arguments[i];
+					if (!arg)
+						continue;
+					if (arg instanceof Ci.nsIPrefBranch)
+						branch = arg;
+					else
+						interface = arg;
+				}
+			}
+			if (interface &&
+				aNewValue instanceof Ci.nsISupports) {
+				return branch.setComplexValue(aPrefstring, interface, aNewValue);
+			}
 			switch (typeof aNewValue)
 			{
 				case 'string':
-					return aBranch.setCharPref(aPrefstring, unescape(encodeURIComponent(aNewValue)));
+					return branch.setCharPref(aPrefstring, unescape(encodeURIComponent(aNewValue)));
 
 				case 'number':
-					return aBranch.setIntPref(aPrefstring, parseInt(aNewValue));
+					return branch.setIntPref(aPrefstring, parseInt(aNewValue));
 
 				default:
-					return aBranch.setBoolPref(aPrefstring, !!aNewValue);
+					return branch.setBoolPref(aPrefstring, !!aNewValue);
 			}
 		},
 
