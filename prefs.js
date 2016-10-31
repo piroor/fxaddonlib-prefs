@@ -197,7 +197,7 @@ if (typeof window == 'undefined' ||
 		{
 			var domains = ('domains' in aObserver) ? aObserver.domains : [aObserver.domain] ;
 			try {
-				for each (var domain in domains)
+				for (var domain of domains)
 					this.Prefs.addObserver(domain, aObserver, false);
 			}
 			catch(e) {
@@ -208,7 +208,7 @@ if (typeof window == 'undefined' ||
 		{
 			var domains = ('domains' in aObserver) ? aObserver.domains : [aObserver.domain] ;
 			try {
-				for each (var domain in domains)
+				for (var domain of domains)
 					this.Prefs.removeObserver(domain, aObserver, false);
 			}
 			catch(e) {
