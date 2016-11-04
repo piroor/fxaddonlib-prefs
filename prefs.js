@@ -51,7 +51,7 @@ if (typeof window == 'undefined' ||
 }
 
 (function() {
-	const currentRevision = 15;
+	const currentRevision = 16;
 
 	if (!('piro.sakura.ne.jp' in window)) window['piro.sakura.ne.jp'] = {};
 
