@@ -34,6 +34,7 @@
 */
 
 var EXPORTED_SYMBOLS = ['prefs'];
+var prefs;
 
 (function() {
 	const currentRevision = 19;
