@@ -37,7 +37,7 @@ var EXPORTED_SYMBOLS = ['prefs'];
 var prefs;
 
 (function() {
-	const currentRevision = 19;
+	const currentRevision = 20;
 
 	const Cc = Components.classes;
 	const Ci = Components.interfaces;
