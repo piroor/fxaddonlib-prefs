@@ -45,7 +45,7 @@ var prefs;
 	prefs = {
 		revision : currentRevision,
 
-		Prefs : Cc['@mozilla.org/preferences;1']
+		Prefs : Cc['@mozilla.org/preferences-service;1']
 					.getService(Ci.nsIPrefBranch),
 
 		DefaultPrefs : Cc['@mozilla.org/preferences-service;1']
